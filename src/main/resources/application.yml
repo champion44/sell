@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: antCar4you!
+    url: jdbc:mysql://bj-cdb-3nfae887.sql.tencentcdb.com:63610/sell?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+  jackson: 
+    default-property-inclusion: non-null
+  freemarker: 
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+wechat:
+    appId: wx975b8fb14fbbef20
+    appSecret: 58d919a4945f37f26c4a9cb9496ba35b
+    mchId: 1498539232
+    mchKey: 38822AF10564CD4ECD56CDD322F9FE3D
+    keyPath: /usr/java/cert/apiclient_cert.p12
+server: 
+  context-path: /sell
