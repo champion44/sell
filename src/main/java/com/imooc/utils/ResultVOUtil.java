@@ -20,6 +20,14 @@ public class ResultVOUtil {
 		return resultVO;
 	}
 	
+	public static ResultVO success(Object object,String dateMsg) {
+		ResultVO resultVO = new ResultVO<>();
+		resultVO.setData(object);
+		resultVO.setCode(0);
+		resultVO.setMsg(dateMsg);
+		return resultVO;
+	}
+	
 	public static ResultVO success(){
 		return success(null);
 	}

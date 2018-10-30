@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.mapper.WxNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.dataobject.WxNews" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="storeId" property="storeid" jdbcType="VARCHAR" />
+    <result column="phoneNum" property="phonenum" jdbcType="VARCHAR" />
+    <result column="indexPage" property="indexpage" jdbcType="VARCHAR" />
+    <result column="jumpPage" property="jumppage" jdbcType="VARCHAR" />
+    <result column="remake1" property="remake1" jdbcType="VARCHAR" />
+    <result column="remake2" property="remake2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, storeId, phoneNum, indexPage, jumpPage, remake1, remake2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wx_news
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wx_news
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.dataobject.WxNews" >
+    insert into wx_news (id, storeId, phoneNum, 
+      indexPage, jumpPage, remake1, 
+      remake2)
+    values (#{id,jdbcType=INTEGER}, #{storeid,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, 
+      #{indexpage,jdbcType=VARCHAR}, #{jumppage,jdbcType=VARCHAR}, #{remake1,jdbcType=VARCHAR}, 
+      #{remake2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.dataobject.WxNews" >
+    insert into wx_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storeid != null" >
+        storeId,
+      </if>
+      <if test="phonenum != null" >
+        phoneNum,
+      </if>
+      <if test="indexpage != null" >
+        indexPage,
+      </if>
+      <if test="jumppage != null" >
+        jumpPage,
+      </if>
+      <if test="remake1 != null" >
+        remake1,
+      </if>
+      <if test="remake2 != null" >
+        remake2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null" >
+        #{storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="indexpage != null" >
+        #{indexpage,jdbcType=VARCHAR},
+      </if>
+      <if test="jumppage != null" >
+        #{jumppage,jdbcType=VARCHAR},
+      </if>
+      <if test="remake1 != null" >
+        #{remake1,jdbcType=VARCHAR},
+      </if>
+      <if test="remake2 != null" >
+        #{remake2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.dataobject.WxNews" >
+    update wx_news
+    <set >
+      <if test="storeid != null" >
+        storeId = #{storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null" >
+        phoneNum = #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="indexpage != null" >
+        indexPage = #{indexpage,jdbcType=VARCHAR},
+      </if>
+      <if test="jumppage != null" >
+        jumpPage = #{jumppage,jdbcType=VARCHAR},
+      </if>
+      <if test="remake1 != null" >
+        remake1 = #{remake1,jdbcType=VARCHAR},
+      </if>
+      <if test="remake2 != null" >
+        remake2 = #{remake2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.dataobject.WxNews" >
+    update wx_news
+    set storeId = #{storeid,jdbcType=VARCHAR},
+      phoneNum = #{phonenum,jdbcType=VARCHAR},
+      indexPage = #{indexpage,jdbcType=VARCHAR},
+      jumpPage = #{jumppage,jdbcType=VARCHAR},
+      remake1 = #{remake1,jdbcType=VARCHAR},
+      remake2 = #{remake2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

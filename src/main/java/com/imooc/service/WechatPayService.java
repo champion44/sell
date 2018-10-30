@@ -1,6 +1,7 @@
 package com.imooc.service;
 
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
+import com.github.binarywang.wxpay.bean.result.WxPayBillResult;
 import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.lly835.bestpay.model.RefundResponse;
@@ -14,4 +15,6 @@ public interface WechatPayService {
 	WxPayOrderNotifyResult parseOrderNotifyResult(String xmlData) throws WxPayException;
 	
 	RefundResponse refund(OrderDTO orderDTO);
+	
+	WxPayBillResult downloadBill(String billDate, String billType, String tarType, String deviceInfo) throws WxPayException;
 }

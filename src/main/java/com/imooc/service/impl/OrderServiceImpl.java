@@ -9,12 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -75,6 +69,7 @@ public class OrderServiceImpl implements OrderService {
 		return orderMaster;
 	}
 
+	// not for redant
 	@Override
 	@Transactional
 	public OrderDTO create(OrderDTO orderDTO) {
@@ -240,8 +235,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderMaster> findByBuyerOpenid(Specification<OrderMaster> spec,Sort sort) {
-		List<OrderMaster> orderMasterList = orderMasterRepository.findByBuyerOpenid(spec,sort);
+	public List<OrderMaster> findByBuyerOpenid(Specification<OrderMaster> spec, Sort sort) {
+		List<OrderMaster> orderMasterList = orderMasterRepository.findByBuyerOpenid(spec, sort);
 		return orderMasterList;
 	}
 
@@ -256,7 +251,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OrderMaster> findByStoreId(Specification<OrderMaster> spec, Sort sort) {
 		List<OrderMaster> orderMasterPage = orderMasterRepository.findByStoreId(spec, sort);
-		//List<OrderDTO> orderDTOList = Timestamp2Time.convert(orderMasterPage);
+		// List<OrderDTO> orderDTOList = Timestamp2Time.convert(orderMasterPage);
 		// Page<OrderDTO> orderDTOPage = new PageImpl<>(orderDTOList, pageable,
 		// orderMasterPage.getTotalElements());
 		return orderMasterPage;
@@ -270,7 +265,7 @@ public class OrderServiceImpl implements OrderService {
 		for (OrderDTO orderDTO : orderDTOList) {
 			try {
 				UserInfo info = userInfoServiceImpl.findByUserOpenid(orderDTO.getBuyerOpenid());
-				if (info.getUserName().equals("")||info.getUserName()==null) {
+				if (info.getUserName().equals("") || info.getUserName() == null) {
 					orderDTO.setRealName(info.getUserWxname());
 				} else {
 					orderDTO.setRealName(info.getUserName());
@@ -286,8 +281,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderMaster> findAll(Specification<OrderMaster> spec,Sort sort) {
-		List<OrderMaster> list =	orderMasterRepository.findAll(spec,sort);
+	public List<OrderMaster> findAll(Specification<OrderMaster> spec, Sort sort) {
+		List<OrderMaster> list = orderMasterRepository.findAll(spec, sort);
 		return list;
 	}
 

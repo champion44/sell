@@ -7,11 +7,19 @@ import lombok.Data;
 
 @Data
 @Component
-@ConfigurationProperties(prefix="wechat")
+@ConfigurationProperties(prefix = "wechat")
 public class WechatAccountingConfig {
 	private String appId;
 
 	private String appSecret;
+
+	private String mpAppid;
+
+	private String mpAppSecret;
+
+	private String mpChampionId;
+
+	private String mpChampionSecret;
 	/**
 	 * 微信支付商户号
 	 */

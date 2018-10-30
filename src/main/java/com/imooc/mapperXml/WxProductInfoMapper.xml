@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.mapper.wxProductInfoMapper">
+  <resultMap id="BaseResultMap" type="com.imooc.dataobject.wxProductInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="storeId" jdbcType="VARCHAR" property="storeid" />
+    <result column="phoneNum" jdbcType="VARCHAR" property="phonenum" />
+    <result column="productName" jdbcType="VARCHAR" property="productname" />
+    <result column="stars" jdbcType="VARCHAR" property="stars" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="fullPrice" jdbcType="VARCHAR" property="fullprice" />
+    <result column="salePrice" jdbcType="VARCHAR" property="saleprice" />
+    <result column="deposit" jdbcType="VARCHAR" property="deposit" />
+    <result column="indexPage" jdbcType="VARCHAR" property="indexpage" />
+    <result column="productInfo" jdbcType="VARCHAR" property="productinfo" />
+    <result column="remark1" jdbcType="VARCHAR" property="remark1" />
+    <result column="remark2" jdbcType="VARCHAR" property="remark2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, storeId, phoneNum, productName, stars, brand, fullPrice, salePrice, deposit, 
+    indexPage, productInfo, remark1, remark2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wx_productInfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wx_productInfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.dataobject.wxProductInfo">
+    insert into wx_productInfo (id, storeId, phoneNum, 
+      productName, stars, brand, 
+      fullPrice, salePrice, deposit, 
+      indexPage, productInfo, remark1, 
+      remark2)
+    values (#{id,jdbcType=INTEGER}, #{storeid,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, 
+      #{productname,jdbcType=VARCHAR}, #{stars,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{fullprice,jdbcType=VARCHAR}, #{saleprice,jdbcType=VARCHAR}, #{deposit,jdbcType=VARCHAR}, 
+      #{indexpage,jdbcType=VARCHAR}, #{productinfo,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, 
+      #{remark2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.dataobject.wxProductInfo">
+    insert into wx_productInfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="storeid != null">
+        storeId,
+      </if>
+      <if test="phonenum != null">
+        phoneNum,
+      </if>
+      <if test="productname != null">
+        productName,
+      </if>
+      <if test="stars != null">
+        stars,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="fullprice != null">
+        fullPrice,
+      </if>
+      <if test="saleprice != null">
+        salePrice,
+      </if>
+      <if test="deposit != null">
+        deposit,
+      </if>
+      <if test="indexpage != null">
+        indexPage,
+      </if>
+      <if test="productinfo != null">
+        productInfo,
+      </if>
+      <if test="remark1 != null">
+        remark1,
+      </if>
+      <if test="remark2 != null">
+        remark2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null">
+        #{storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null">
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null">
+        #{stars,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="fullprice != null">
+        #{fullprice,jdbcType=VARCHAR},
+      </if>
+      <if test="saleprice != null">
+        #{saleprice,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null">
+        #{deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="indexpage != null">
+        #{indexpage,jdbcType=VARCHAR},
+      </if>
+      <if test="productinfo != null">
+        #{productinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null">
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null">
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.dataobject.wxProductInfo">
+    update wx_productInfo
+    <set>
+      <if test="storeid != null">
+        storeId = #{storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null">
+        phoneNum = #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null">
+        stars = #{stars,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="fullprice != null">
+        fullPrice = #{fullprice,jdbcType=VARCHAR},
+      </if>
+      <if test="saleprice != null">
+        salePrice = #{saleprice,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null">
+        deposit = #{deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="indexpage != null">
+        indexPage = #{indexpage,jdbcType=VARCHAR},
+      </if>
+      <if test="productinfo != null">
+        productInfo = #{productinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null">
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null">
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.dataobject.wxProductInfo">
+    update wx_productInfo
+    set storeId = #{storeid,jdbcType=VARCHAR},
+      phoneNum = #{phonenum,jdbcType=VARCHAR},
+      productName = #{productname,jdbcType=VARCHAR},
+      stars = #{stars,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      fullPrice = #{fullprice,jdbcType=VARCHAR},
+      salePrice = #{saleprice,jdbcType=VARCHAR},
+      deposit = #{deposit,jdbcType=VARCHAR},
+      indexPage = #{indexpage,jdbcType=VARCHAR},
+      productInfo = #{productinfo,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.imooc.dataobject.wxProductInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="storeId" jdbcType="VARCHAR" property="storeid" />
+    <result column="phoneNum" jdbcType="VARCHAR" property="phonenum" />
+    <result column="productName" jdbcType="VARCHAR" property="productname" />
+    <result column="stars" jdbcType="VARCHAR" property="stars" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="fullPrice" jdbcType="VARCHAR" property="fullprice" />
+    <result column="salePrice" jdbcType="VARCHAR" property="saleprice" />
+    <result column="deposit" jdbcType="VARCHAR" property="deposit" />
+    <result column="indexPage" jdbcType="VARCHAR" property="indexpage" />
+    <result column="productInfo" jdbcType="VARCHAR" property="productinfo" />
+    <result column="remark1" jdbcType="VARCHAR" property="remark1" />
+    <result column="remark2" jdbcType="VARCHAR" property="remark2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, storeId, phoneNum, productName, stars, brand, fullPrice, salePrice, deposit, 
+    indexPage, productInfo, remark1, remark2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wx_productInfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wx_productInfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.dataobject.wxProductInfo">
+    insert into wx_productInfo (id, storeId, phoneNum, 
+      productName, stars, brand, 
+      fullPrice, salePrice, deposit, 
+      indexPage, productInfo, remark1, 
+      remark2)
+    values (#{id,jdbcType=INTEGER}, #{storeid,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, 
+      #{productname,jdbcType=VARCHAR}, #{stars,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{fullprice,jdbcType=VARCHAR}, #{saleprice,jdbcType=VARCHAR}, #{deposit,jdbcType=VARCHAR}, 
+      #{indexpage,jdbcType=VARCHAR}, #{productinfo,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, 
+      #{remark2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.dataobject.wxProductInfo">
+    insert into wx_productInfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="storeid != null">
+        storeId,
+      </if>
+      <if test="phonenum != null">
+        phoneNum,
+      </if>
+      <if test="productname != null">
+        productName,
+      </if>
+      <if test="stars != null">
+        stars,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="fullprice != null">
+        fullPrice,
+      </if>
+      <if test="saleprice != null">
+        salePrice,
+      </if>
+      <if test="deposit != null">
+        deposit,
+      </if>
+      <if test="indexpage != null">
+        indexPage,
+      </if>
+      <if test="productinfo != null">
+        productInfo,
+      </if>
+      <if test="remark1 != null">
+        remark1,
+      </if>
+      <if test="remark2 != null">
+        remark2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null">
+        #{storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null">
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null">
+        #{stars,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="fullprice != null">
+        #{fullprice,jdbcType=VARCHAR},
+      </if>
+      <if test="saleprice != null">
+        #{saleprice,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null">
+        #{deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="indexpage != null">
+        #{indexpage,jdbcType=VARCHAR},
+      </if>
+      <if test="productinfo != null">
+        #{productinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null">
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null">
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.dataobject.wxProductInfo">
+    update wx_productInfo
+    <set>
+      <if test="storeid != null">
+        storeId = #{storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null">
+        phoneNum = #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null">
+        stars = #{stars,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="fullprice != null">
+        fullPrice = #{fullprice,jdbcType=VARCHAR},
+      </if>
+      <if test="saleprice != null">
+        salePrice = #{saleprice,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null">
+        deposit = #{deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="indexpage != null">
+        indexPage = #{indexpage,jdbcType=VARCHAR},
+      </if>
+      <if test="productinfo != null">
+        productInfo = #{productinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null">
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null">
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.dataobject.wxProductInfo">
+    update wx_productInfo
+    set storeId = #{storeid,jdbcType=VARCHAR},
+      phoneNum = #{phonenum,jdbcType=VARCHAR},
+      productName = #{productname,jdbcType=VARCHAR},
+      stars = #{stars,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      fullPrice = #{fullprice,jdbcType=VARCHAR},
+      salePrice = #{saleprice,jdbcType=VARCHAR},
+      deposit = #{deposit,jdbcType=VARCHAR},
+      indexPage = #{indexpage,jdbcType=VARCHAR},
+      productInfo = #{productinfo,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.imooc.dataobject.WxProductInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="storeId" jdbcType="VARCHAR" property="storeid" />
+    <result column="phoneNum" jdbcType="VARCHAR" property="phonenum" />
+    <result column="productName" jdbcType="VARCHAR" property="productname" />
+    <result column="stars" jdbcType="VARCHAR" property="stars" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="fullPrice" jdbcType="VARCHAR" property="fullprice" />
+    <result column="salePrice" jdbcType="VARCHAR" property="saleprice" />
+    <result column="deposit" jdbcType="VARCHAR" property="deposit" />
+    <result column="indexPage" jdbcType="VARCHAR" property="indexpage" />
+    <result column="productInfo" jdbcType="VARCHAR" property="productinfo" />
+    <result column="remark1" jdbcType="VARCHAR" property="remark1" />
+    <result column="remark2" jdbcType="VARCHAR" property="remark2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, storeId, phoneNum, productName, stars, brand, fullPrice, salePrice, deposit, 
+    indexPage, productInfo, remark1, remark2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wx_productInfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wx_productInfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.dataobject.WxProductInfo">
+    insert into wx_productInfo (id, storeId, phoneNum, 
+      productName, stars, brand, 
+      fullPrice, salePrice, deposit, 
+      indexPage, productInfo, remark1, 
+      remark2)
+    values (#{id,jdbcType=INTEGER}, #{storeid,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, 
+      #{productname,jdbcType=VARCHAR}, #{stars,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{fullprice,jdbcType=VARCHAR}, #{saleprice,jdbcType=VARCHAR}, #{deposit,jdbcType=VARCHAR}, 
+      #{indexpage,jdbcType=VARCHAR}, #{productinfo,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, 
+      #{remark2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.dataobject.WxProductInfo">
+    insert into wx_productInfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="storeid != null">
+        storeId,
+      </if>
+      <if test="phonenum != null">
+        phoneNum,
+      </if>
+      <if test="productname != null">
+        productName,
+      </if>
+      <if test="stars != null">
+        stars,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="fullprice != null">
+        fullPrice,
+      </if>
+      <if test="saleprice != null">
+        salePrice,
+      </if>
+      <if test="deposit != null">
+        deposit,
+      </if>
+      <if test="indexpage != null">
+        indexPage,
+      </if>
+      <if test="productinfo != null">
+        productInfo,
+      </if>
+      <if test="remark1 != null">
+        remark1,
+      </if>
+      <if test="remark2 != null">
+        remark2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null">
+        #{storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null">
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null">
+        #{stars,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="fullprice != null">
+        #{fullprice,jdbcType=VARCHAR},
+      </if>
+      <if test="saleprice != null">
+        #{saleprice,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null">
+        #{deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="indexpage != null">
+        #{indexpage,jdbcType=VARCHAR},
+      </if>
+      <if test="productinfo != null">
+        #{productinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null">
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null">
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.dataobject.WxProductInfo">
+    update wx_productInfo
+    <set>
+      <if test="storeid != null">
+        storeId = #{storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null">
+        phoneNum = #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null">
+        stars = #{stars,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="fullprice != null">
+        fullPrice = #{fullprice,jdbcType=VARCHAR},
+      </if>
+      <if test="saleprice != null">
+        salePrice = #{saleprice,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null">
+        deposit = #{deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="indexpage != null">
+        indexPage = #{indexpage,jdbcType=VARCHAR},
+      </if>
+      <if test="productinfo != null">
+        productInfo = #{productinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null">
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null">
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.dataobject.WxProductInfo">
+    update wx_productInfo
+    set storeId = #{storeid,jdbcType=VARCHAR},
+      phoneNum = #{phonenum,jdbcType=VARCHAR},
+      productName = #{productname,jdbcType=VARCHAR},
+      stars = #{stars,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      fullPrice = #{fullprice,jdbcType=VARCHAR},
+      salePrice = #{saleprice,jdbcType=VARCHAR},
+      deposit = #{deposit,jdbcType=VARCHAR},
+      indexPage = #{indexpage,jdbcType=VARCHAR},
+      productInfo = #{productinfo,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
+import com.github.binarywang.wxpay.bean.result.WxPayBillResult;
 import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
@@ -26,7 +27,7 @@ public class WechatPayServiceImpl implements WechatPayService {
 
 	@Autowired
 	private WxPayService wxPayService;
-
+	
 	@Autowired
 	private BestPayServiceImpl bestPayServiceImpl;
 
@@ -70,6 +71,12 @@ public class WechatPayServiceImpl implements WechatPayService {
 		RefundResponse response = bestPayServiceImpl.refund(refundRequest);
 		log.info("【微信退款】response={}", JsonUtil.toJson(response));
 		return response;
+	}
+
+	@Override
+	public WxPayBillResult downloadBill(String billDate, String billType, String tarType, String deviceInfo) throws WxPayException {
+		
+		return wxPayService.downloadBill(billDate, billType, tarType, deviceInfo);
 	}
 
 }

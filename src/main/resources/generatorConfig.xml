@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+ 
+    <!-- 本地数据库驱动程序jar包的全路径 -->
+    <classPathEntry location="/Users/champion/Downloads/mysql-connector-java-8.0.12.jar"/>
+ 
+    <context id="context" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true" />
+            <!--其中suppressDate是去掉生成日期那行注释，suppressAllComments是去掉所有的注-->
+        </commentGenerator>
+ 
+        <!-- 数据库的相关配置 -->
+         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://120.76.44.84:8066/HYSGDATA?useSSL=false" userId="duzhong" password="hsyg2220707~!@"/>
+ 
+<!--          <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/sell?useSSL=false" userId="root" password="antCar4you!"/>
+ --> 
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+ 
+        <!-- 实体类生成的位置 -->
+        <javaModelGenerator targetPackage="com.imooc.dataobject" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+ 
+        <!-- *Mapper.xml 文件的位置 -->
+        <sqlMapGenerator targetPackage="com.imooc.mapperXml" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+ 
+        <!-- Mapper 接口文件的位置 -->
+        <javaClientGenerator targetPackage="com.imooc.mapper" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+ 
+        <table tableName="wx_user" domainObjectName="WxUser" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+    </context>
+</generatorConfiguration>

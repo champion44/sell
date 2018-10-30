@@ -39,11 +39,19 @@ public enum ResultEnum {
 
 	WXPAY_NOTIFY_MONEY_VERIFY_ERROR(21, "微信支付异步通知金额校验不通过"),
 
-	REFUND_MONEY_ERROR(22, "退款金额不正确"), 
-	
-	USER_NOT_EXIST(23, "用户不存在"), INFO_NOT_MATCH(24, "输入不匹配"),
-	
-	OPERATEOR_ERR(25,"无操作权限");
+	REFUND_MONEY_ERROR(22, "退款金额不正确"),
+
+	USER_NOT_EXIST(23, "用户不存在"),
+
+	INFO_NOT_MATCH(24, "输入不匹配"),
+
+	OPERATEOR_ERR(25, "无操作权限"),
+
+	REFUND_ID_ERROR(26, "此商户不可退款"),
+
+	LOGIN_FAIL(27, "登录失败, 登录信息不正确"),
+
+	LOGOUT_SUCCESS(28, "登出成功"),;
 
 	private Integer code;
 

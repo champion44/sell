@@ -301,6 +301,9 @@ public class BuyerOrderController {
 			if (orderDTO.getOrderAmount() > 1.1) {
 				throw new SellException(ResultEnum.REFUND_MONEY_ERROR);
 			}
+			if(orderDTO.getStoreId()!=200) {
+				throw new SellException(ResultEnum.REFUND_ID_ERROR);
+			}
 		} catch (Exception e) {
 			return new ResultVOUtil().error(1, e.getMessage());
 		}
@@ -311,11 +314,15 @@ public class BuyerOrderController {
 			orderService.update(orderDTO);
 			String openid = orderDTO.getBuyerOpenid();
 			UserInfo info = userInfoService.findByUserOpenid(openid);
+//			状态为2 已缴定金 此时改为为报名
 			if (info.getPaid() == 2) {
 				info.setPaid(0);
 			}
 			userInfoService.save(info);
 		} catch (Exception e) {
+			if(e.getMessage().contains("基本账户余额不足")) {
+				return new ResultVOUtil().error(1, "请于20:00后再试");
+			}
 			return new ResultVOUtil().error(1, e.getMessage());
 		}
 		return new ResultVOUtil().success();

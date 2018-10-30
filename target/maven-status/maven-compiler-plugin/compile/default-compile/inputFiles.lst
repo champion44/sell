@@ -58,3 +58,4 @@
 /Users/champion/Downloads/antCarSpringboot/sell/src/main/java/com/imooc/VO/ProductVO.java
 /Users/champion/Downloads/antCarSpringboot/sell/src/main/java/com/imooc/exception/SellException.java
 /Users/champion/Downloads/antCarSpringboot/sell/src/main/java/com/imooc/repository/OrderMasterRepository.java
+/Users/champion/Downloads/antCarSpringboot/sell/src/main/java/com/imooc/controller/WechatController.java

@@ -6,8 +6,10 @@ package com.imooc.controller;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,12 +17,18 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpRequest;
+import org.apache.http.params.HttpParams;
+import org.hibernate.Session;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.binarywang.wxpay.bean.result.WxPayBillBaseResult;
+import com.github.binarywang.wxpay.bean.result.WxPayBillResult;
 import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.imooc.Enum.ResultEnum;
@@ -36,11 +46,15 @@ import com.imooc.VO.ResultVO;
 import com.imooc.dataobject.OrderMaster;
 import com.imooc.dataobject.Stores;
 import com.imooc.dataobject.UserInfo;
+import com.imooc.dataobject.Bill;
+import com.imooc.dataobject.BillResult;
 import com.imooc.exception.SellException;
+import com.imooc.service.impl.BillServiceImpl;
 import com.imooc.service.impl.OrderServiceImpl;
 import com.imooc.service.impl.StoresServiceImpl;
 import com.imooc.service.impl.UserInfoServiceImpl;
 import com.imooc.service.impl.WechatPayServiceImpl;
+import com.imooc.service.impl.WxPayBillBaseResultListServiceImpl;
 import com.imooc.utils.DateUtil;
 import com.imooc.utils.JsonUtil;
 import com.imooc.utils.KeyUtil;
@@ -76,6 +90,27 @@ public class WeixinController {
 
 	@Autowired
 	private UserInfoServiceImpl userInfoService;
+
+	@Autowired
+	private WxPayBillBaseResultListServiceImpl billService;
+
+	@Autowired
+	private BillServiceImpl billServiceImpl;
+
+	public static String APPID = "wx8982d3b2acdab91e";
+
+	public static String SECRET = "2bff41acaf1004f852d653d47821310e";
+
+
+	@RequestMapping("/Oauth")
+	public void Oauth(@RequestParam("code") String code) {
+		log.info("code={}", code);
+		String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx8982d3b2acdab91e&secret=2bff41acaf1004f852d653d47821310e&code="
+				+ code + "&grant_type=authorization_code";
+		RestTemplate restTemplate = new RestTemplate();
+		String result = restTemplate.getForObject(url, String.class);
+		log.info(JsonUtil.toJson(result));
+	}
 
 	@RequestMapping("/getDate")
 	public ArrayList<String> getDate() {
@@ -173,10 +208,11 @@ public class WeixinController {
 
 			// throw new SellException(ResultEnum.USER_NOT_EXIST);
 		}
-		if (userInfo.getBooked() == 1) {
-			String msg = "您已预约过" + userInfo.getBookDate();
-			return new ResultVOUtil().error(1, msg);
-		}
+		// 不再验证 因为加入了过期自动初始化
+		/*
+		 * if (userInfo.getBooked() == 1) { String msg = "您已预约过" +
+		 * userInfo.getBookDate(); return new ResultVOUtil().error(1, msg); }
+		 */
 		userInfo.setBookDate(date);
 		userInfo.setBooked(1);
 		userInfoService.save(userInfo);
@@ -210,7 +246,7 @@ public class WeixinController {
 		return counts;
 	}
 
-	// 返回所以预约的用户
+	// 返回所有预约的用户 给教练查看信息 前端不可更改名字电话 如有误 管理员通过用户信息查看修改
 	@RequestMapping("/getBookedInfo")
 	public List<UserInfo> getBookedInfo() {
 		List<UserInfo> infoList = null;
@@ -261,20 +297,124 @@ public class WeixinController {
 	// 授权获取openid
 	@RequestMapping("/auth")
 	public String auth(@RequestParam("code") String code) {
-		// code转换成openid
+		// 小蚁学车
 		String getOpenidurl = "https://api.weixin.qq.com/sns/jscode2session?appid=wx975b8fb14fbbef20&secret=58d919a4945f37f26c4a9cb9496ba35b&js_code="
 				+ code + "&grant_type=authorization_code";
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(getOpenidurl, String.class);
-		// 白写这么多格式 自己就封装成了json
-		/*
-		 * log.info(result); String[] stringArr = result.split(","); String[] stringArr1
-		 * = stringArr[0].split(":"); stringArr = stringArr[1].split(":"); String
-		 * sessionKey = stringArr1[1]; sessionKey = sessionKey.replace("\"", "");
-		 * log.info(sessionKey); String openid = stringArr[1]; openid =
-		 * openid.replace("\"", ""); openid = openid.replace("}", ""); log.info(openid);
-		 */
 		return result;
+	}
+
+	@RequestMapping("/authForStudy")
+	public String authForStudy(@RequestParam("code") String code) {
+		// 通过code转换成openid wxfdc1cfad38b7885f
+		// 爱学习
+		String getOpenidurl = "https://api.weixin.qq.com/sns/jscode2session?" + "appid=wxfdc1cfad38b7885f&"
+				+ "secret=c2a8399db32fbab4952abeedaa7c797c&" + "js_code=" + code + "&grant_type=authorization_code";
+		RestTemplate restTemplate = new RestTemplate();
+		String result = restTemplate.getForObject(getOpenidurl, String.class);
+		return result;
+	}
+
+	//获取access_token
+	@RequestMapping("/codeToAccesstoken")
+	public String codeToAccesstoken() {
+		String codeToAccesstoken = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+APPID+"&secret="+SECRET;
+		//		String getOpenidurl = "https://api.weixin.qq.com/sns/jscode2session?" + "appid=wxfdc1cfad38b7885f&"
+		//				+ "secret=c2a8399db32fbab4952abeedaa7c797c&" + "js_code=" + code + "&grant_type=authorization_code";
+		RestTemplate restTemplate = new RestTemplate();
+		String result = restTemplate.getForObject(codeToAccesstoken, String.class);
+		log.info(result.toString());
+		return result;
+	}
+	//	不刷新 返回账单数据
+	@RequestMapping("/downloadbillJson")
+	public ResultVO downloadbillJson(@RequestParam("date") String date, Map<String, Object> map,HttpSession session) throws WxPayException {
+		String billDate = date;
+		String billType = "ALL";
+		String tarType = "";
+		String deviceInfo = "";
+		WxPayBillResult wxPayBillResult = new WxPayBillResult();
+		try {
+			wxPayBillResult = wechatPayServiceImpl.downloadBill(billDate, billType, tarType, deviceInfo);
+			BillResult wxPayBillBaseResultList = new BillResult();
+			wxPayBillBaseResultList.setBillDate(billDate);
+			wxPayBillBaseResultList.setTotalCouponFee(wxPayBillResult.getTotalCouponFee());
+			wxPayBillBaseResultList.setTotalFee(wxPayBillResult.getTotalFee());
+			wxPayBillBaseResultList.setTotalPoundageFee(wxPayBillResult.getTotalPoundageFee());
+			wxPayBillBaseResultList.setTotalRecord(wxPayBillResult.getTotalRecord());
+			wxPayBillBaseResultList.setTotalRefundFee(wxPayBillResult.getTotalRefundFee());
+			wxPayBillBaseResultList.setWxPayBillBaseResultList(wxPayBillResult.getWxPayBillBaseResultLst().toString());
+			billService.save(wxPayBillBaseResultList);
+			for(WxPayBillBaseResult result : wxPayBillResult.getWxPayBillBaseResultLst()) {
+				Bill bill = new Bill();
+				BeanUtils.copyProperties(result, bill);
+				bill.setBillTime(billDate);
+				billServiceImpl.save(bill);
+			}
+			session.setAttribute("detailList",wxPayBillResult.getWxPayBillBaseResultLst());
+			//	map.put("billList", wxPayBillBaseResultList);
+			//		map.put("detailList",wxPayBillResult.getWxPayBillBaseResultLst());
+			//			map.put("totalRecord", wxPayBillResult.getTotalRecord());
+			//			map.put("totalFee", wxPayBillResult.getTotalFee());
+			//			map.put("totalRefundFee", wxPayBillResult.getTotalRefundFee());
+			//			map.put("msg", "微信账单统计");
+		} catch (Exception e) {
+			log.info(e.toString());
+			log.info(e.getMessage());
+		}
+		if(wxPayBillResult.getTotalRecord()==null) {
+			return new ResultVOUtil().error(1, date);
+		}
+		return new ResultVOUtil().success(wxPayBillResult,date);
+		//map.put("tradeDate", date);
+		//	return new ModelAndView("bill/bill", map);
+	}
+	// 下载对账单
+	@RequestMapping("/downloadbill")
+	public ModelAndView downloadbill(Map<String, Object> map,String date) throws WxPayException {
+		//HttpParams	uri = request.getParams();
+		String billDate = "";
+		if(date==null) {
+			Calendar c = Calendar.getInstance();
+			SimpleDateFormat f = new SimpleDateFormat("yyyyMMdd");
+			billDate = f.format(c.getTime());
+		}else {
+			billDate  = date;
+		}
+		String billType = "ALL";
+		String tarType = "";
+		String deviceInfo = "";
+		WxPayBillResult wxPayBillResult = new WxPayBillResult();
+		try {
+			wxPayBillResult = wechatPayServiceImpl.downloadBill(billDate, billType, tarType, deviceInfo);
+			BillResult wxPayBillBaseResultList = new BillResult();
+			wxPayBillBaseResultList.setBillDate(billDate);
+			wxPayBillBaseResultList.setTotalCouponFee(wxPayBillResult.getTotalCouponFee());
+			wxPayBillBaseResultList.setTotalFee(wxPayBillResult.getTotalFee());
+			wxPayBillBaseResultList.setTotalPoundageFee(wxPayBillResult.getTotalPoundageFee());
+			wxPayBillBaseResultList.setTotalRecord(wxPayBillResult.getTotalRecord());
+			wxPayBillBaseResultList.setTotalRefundFee(wxPayBillResult.getTotalRefundFee());
+			wxPayBillBaseResultList.setWxPayBillBaseResultList(wxPayBillResult.getWxPayBillBaseResultLst().toString());
+			billService.save(wxPayBillBaseResultList);
+			for(WxPayBillBaseResult result : wxPayBillResult.getWxPayBillBaseResultLst()) {
+				Bill bill = new Bill();
+				BeanUtils.copyProperties(result, bill);
+				bill.setBillTime(billDate);
+				billServiceImpl.save(bill);
+			}		
+			map.put("billList", wxPayBillBaseResultList);
+			map.put("detailList",wxPayBillResult.getWxPayBillBaseResultLst());
+			map.put("totalRecord", wxPayBillResult.getTotalRecord());
+			map.put("totalFee", wxPayBillResult.getTotalFee());
+			map.put("totalRefundFee", wxPayBillResult.getTotalRefundFee());
+			map.put("msg", "微信账单统计");
+		} catch (Exception e) {
+			log.info(e.toString());
+			log.info(e.getMessage());
+		}
+		map.put("tradeDate", billDate);
+		return new ModelAndView("bill/bill", map);
 	}
 
 	// 支付接口
@@ -290,16 +430,26 @@ public class WeixinController {
 			throw new SellException(ResultEnum.USER_NOT_EXIST);
 		}
 		// 大笔金额验证
-		/*
-		 * if (storeId == 199) { if (!MathUtil.equals(amount, 2680.0)) {
-		 * WxPayUnifiedOrderResult errResult = new WxPayUnifiedOrderResult();
-		 * errResult.setReturnMsg("支付金额不正确"); errResult.setErrCode("1");
-		 * log.info(errResult.toString()); return errResult; } } if (storeId == 198) {
-		 * if (!MathUtil.equals(amount, 99.0)) { WxPayUnifiedOrderResult errResult = new
-		 * WxPayUnifiedOrderResult(); errResult.setReturnMsg("支付金额不正确");
-		 * errResult.setErrCode("1"); log.info(errResult.toString()); return errResult;
-		 * } }
-		 */
+
+		if (storeId == 199) {
+			if (!MathUtil.equals(amount, 2680.0)) {
+				WxPayUnifiedOrderResult errResult = new WxPayUnifiedOrderResult();
+				errResult.setReturnMsg("支付金额不正确");
+				errResult.setErrCode("1");
+				log.info(errResult.toString());
+				return errResult;
+			}
+		}
+		if (storeId == 198) {
+			if (!MathUtil.equals(amount, 99.0)) {
+				WxPayUnifiedOrderResult errResult = new WxPayUnifiedOrderResult();
+				errResult.setReturnMsg("支付金额不正确");
+				errResult.setErrCode("1");
+				log.info(errResult.toString());
+				return errResult;
+			}
+		}
+
 		OrderDTO orderDTO = new OrderDTO();
 		orderDTO.setBuyerOpenid(openId);
 		orderDTO.setBuyerPhone(phone);

@@ -1,9 +1,9 @@
 spring:
-  datasource:
+  datasource: 
     driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: antCar4you!
-    url: jdbc:mysql://bj-cdb-3nfae887.sql.tencentcdb.com:63610/sell?characterEncoding=utf-8&useSSL=false
+    username: duzhong
+    password: hsyg2220707~!@
+    url: jdbc:mysql://120.76.44.84:8066/HYSGDATA?characterEncoding=utf-8&useSSL=false
   jpa:
     show-sql: true
   jackson: 
@@ -12,10 +12,15 @@ spring:
     suffix: .ftl
     template-loader-path: classpath:/templates/
 wechat:
+    mpAppid: wx8982d3b2acdab91e 
+    mpAppSecret: 2bff41acaf1004f852d653d47821310e
     appId: wx975b8fb14fbbef20
     appSecret: 58d919a4945f37f26c4a9cb9496ba35b
     mchId: 1498539232
     mchKey: 38822AF10564CD4ECD56CDD322F9FE3D
-    keyPath: /usr/java/cert/apiclient_cert.p12
+    mpChampionId: wx8872d504e38e02ad
+    mpChampionSecret: e6455024387619781985cc61252a076c
+    #keyPath: /usr/java/cert/apiclient_cert.p12
+    keyPath: /Users/usr/local/wechatcert/apiclient_cert.p12
 server: 
   context-path: /sell

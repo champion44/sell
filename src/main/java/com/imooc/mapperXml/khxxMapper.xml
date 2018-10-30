@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.mapper.khxxMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.dataobject.khxx" >
+    <id column="khbh" property="khbh" jdbcType="BIGINT" />
+    <result column="sjh" property="sjh" jdbcType="VARCHAR" />
+    <result column="khxm" property="khxm" jdbcType="CHAR" />
+    <result column="khxb" property="khxb" jdbcType="CHAR" />
+    <result column="khsr" property="khsr" jdbcType="CHAR" />
+    <result column="khzy" property="khzy" jdbcType="CHAR" />
+    <result column="khqq" property="khqq" jdbcType="CHAR" />
+    <result column="khwx" property="khwx" jdbcType="CHAR" />
+    <result column="khxj" property="khxj" jdbcType="CHAR" />
+    <result column="ljxf" property="ljxf" jdbcType="DECIMAL" />
+    <result column="ljjf" property="ljjf" jdbcType="DECIMAL" />
+    <result column="zkl" property="zkl" jdbcType="DECIMAL" />
+    <result column="khdz" property="khdz" jdbcType="VARCHAR" />
+    <result column="djrq" property="djrq" jdbcType="CHAR" />
+    <result column="khh" property="khh" jdbcType="CHAR" />
+    <result column="mdbh" property="mdbh" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    khbh, sjh, khxm, khxb, khsr, khzy, khqq, khwx, khxj, ljxf, ljjf, zkl, khdz, djrq, 
+    khh, mdbh
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from khxx
+    where khbh = #{khbh,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from khxx
+    where khbh = #{khbh,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.dataobject.khxx" >
+    insert into khxx (khbh, sjh, khxm, 
+      khxb, khsr, khzy, khqq, 
+      khwx, khxj, ljxf, ljjf, 
+      zkl, khdz, djrq, khh, 
+      mdbh)
+    values (#{khbh,jdbcType=BIGINT}, #{sjh,jdbcType=VARCHAR}, #{khxm,jdbcType=CHAR}, 
+      #{khxb,jdbcType=CHAR}, #{khsr,jdbcType=CHAR}, #{khzy,jdbcType=CHAR}, #{khqq,jdbcType=CHAR}, 
+      #{khwx,jdbcType=CHAR}, #{khxj,jdbcType=CHAR}, #{ljxf,jdbcType=DECIMAL}, #{ljjf,jdbcType=DECIMAL}, 
+      #{zkl,jdbcType=DECIMAL}, #{khdz,jdbcType=VARCHAR}, #{djrq,jdbcType=CHAR}, #{khh,jdbcType=CHAR}, 
+      #{mdbh,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.dataobject.khxx" >
+    insert into khxx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="khbh != null" >
+        khbh,
+      </if>
+      <if test="sjh != null" >
+        sjh,
+      </if>
+      <if test="khxm != null" >
+        khxm,
+      </if>
+      <if test="khxb != null" >
+        khxb,
+      </if>
+      <if test="khsr != null" >
+        khsr,
+      </if>
+      <if test="khzy != null" >
+        khzy,
+      </if>
+      <if test="khqq != null" >
+        khqq,
+      </if>
+      <if test="khwx != null" >
+        khwx,
+      </if>
+      <if test="khxj != null" >
+        khxj,
+      </if>
+      <if test="ljxf != null" >
+        ljxf,
+      </if>
+      <if test="ljjf != null" >
+        ljjf,
+      </if>
+      <if test="zkl != null" >
+        zkl,
+      </if>
+      <if test="khdz != null" >
+        khdz,
+      </if>
+      <if test="djrq != null" >
+        djrq,
+      </if>
+      <if test="khh != null" >
+        khh,
+      </if>
+      <if test="mdbh != null" >
+        mdbh,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="khbh != null" >
+        #{khbh,jdbcType=BIGINT},
+      </if>
+      <if test="sjh != null" >
+        #{sjh,jdbcType=VARCHAR},
+      </if>
+      <if test="khxm != null" >
+        #{khxm,jdbcType=CHAR},
+      </if>
+      <if test="khxb != null" >
+        #{khxb,jdbcType=CHAR},
+      </if>
+      <if test="khsr != null" >
+        #{khsr,jdbcType=CHAR},
+      </if>
+      <if test="khzy != null" >
+        #{khzy,jdbcType=CHAR},
+      </if>
+      <if test="khqq != null" >
+        #{khqq,jdbcType=CHAR},
+      </if>
+      <if test="khwx != null" >
+        #{khwx,jdbcType=CHAR},
+      </if>
+      <if test="khxj != null" >
+        #{khxj,jdbcType=CHAR},
+      </if>
+      <if test="ljxf != null" >
+        #{ljxf,jdbcType=DECIMAL},
+      </if>
+      <if test="ljjf != null" >
+        #{ljjf,jdbcType=DECIMAL},
+      </if>
+      <if test="zkl != null" >
+        #{zkl,jdbcType=DECIMAL},
+      </if>
+      <if test="khdz != null" >
+        #{khdz,jdbcType=VARCHAR},
+      </if>
+      <if test="djrq != null" >
+        #{djrq,jdbcType=CHAR},
+      </if>
+      <if test="khh != null" >
+        #{khh,jdbcType=CHAR},
+      </if>
+      <if test="mdbh != null" >
+        #{mdbh,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.dataobject.khxx" >
+    update khxx
+    <set >
+      <if test="sjh != null" >
+        sjh = #{sjh,jdbcType=VARCHAR},
+      </if>
+      <if test="khxm != null" >
+        khxm = #{khxm,jdbcType=CHAR},
+      </if>
+      <if test="khxb != null" >
+        khxb = #{khxb,jdbcType=CHAR},
+      </if>
+      <if test="khsr != null" >
+        khsr = #{khsr,jdbcType=CHAR},
+      </if>
+      <if test="khzy != null" >
+        khzy = #{khzy,jdbcType=CHAR},
+      </if>
+      <if test="khqq != null" >
+        khqq = #{khqq,jdbcType=CHAR},
+      </if>
+      <if test="khwx != null" >
+        khwx = #{khwx,jdbcType=CHAR},
+      </if>
+      <if test="khxj != null" >
+        khxj = #{khxj,jdbcType=CHAR},
+      </if>
+      <if test="ljxf != null" >
+        ljxf = #{ljxf,jdbcType=DECIMAL},
+      </if>
+      <if test="ljjf != null" >
+        ljjf = #{ljjf,jdbcType=DECIMAL},
+      </if>
+      <if test="zkl != null" >
+        zkl = #{zkl,jdbcType=DECIMAL},
+      </if>
+      <if test="khdz != null" >
+        khdz = #{khdz,jdbcType=VARCHAR},
+      </if>
+      <if test="djrq != null" >
+        djrq = #{djrq,jdbcType=CHAR},
+      </if>
+      <if test="khh != null" >
+        khh = #{khh,jdbcType=CHAR},
+      </if>
+      <if test="mdbh != null" >
+        mdbh = #{mdbh,jdbcType=INTEGER},
+      </if>
+    </set>
+    where khbh = #{khbh,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.dataobject.khxx" >
+    update khxx
+    set sjh = #{sjh,jdbcType=VARCHAR},
+      khxm = #{khxm,jdbcType=CHAR},
+      khxb = #{khxb,jdbcType=CHAR},
+      khsr = #{khsr,jdbcType=CHAR},
+      khzy = #{khzy,jdbcType=CHAR},
+      khqq = #{khqq,jdbcType=CHAR},
+      khwx = #{khwx,jdbcType=CHAR},
+      khxj = #{khxj,jdbcType=CHAR},
+      ljxf = #{ljxf,jdbcType=DECIMAL},
+      ljjf = #{ljjf,jdbcType=DECIMAL},
+      zkl = #{zkl,jdbcType=DECIMAL},
+      khdz = #{khdz,jdbcType=VARCHAR},
+      djrq = #{djrq,jdbcType=CHAR},
+      khh = #{khh,jdbcType=CHAR},
+      mdbh = #{mdbh,jdbcType=INTEGER}
+    where khbh = #{khbh,jdbcType=BIGINT}
+  </update>
+</mapper>

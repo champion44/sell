@@ -8,12 +8,7 @@ import org.springframework.stereotype.Service;
 import com.imooc.dataobject.UserInfo;
 import com.imooc.repository.UserInfoRepository;
 import com.imooc.service.UserInfoService;
-import com.imooc.utils.JsonUtil;
-import com.imooc.utils.KeyUtil;
-
-import lombok.extern.slf4j.Slf4j;
 @Service
-@Slf4j
 public class UserInfoServiceImpl implements UserInfoService{
 
 	@Autowired
