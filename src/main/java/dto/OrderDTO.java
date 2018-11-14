@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.imooc.Enum.OrderStatusEnum;
 import com.imooc.Enum.PayStatusEnum;
-import com.imooc.dataobject.OrderDetail;
 import com.imooc.utils.EnumUtil;
 import com.imooc.utils.serializer.Date2LongSerializer;
 
@@ -61,7 +60,6 @@ public class OrderDTO {
 	
 	private String orderByTime;
 	
-	List<OrderDetail> orderDetailList;
 
 	@JsonIgnore
 	@SuppressWarnings("unchecked")

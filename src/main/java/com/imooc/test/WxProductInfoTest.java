@@ -15,26 +15,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WxProductInfoTest {
 
-	@Autowired
-	private WxProductInfoServiceImpl serviceImpl;
 	
 	@Test
 	public void test() {
-		WxProductInfo wxProductInfo = new WxProductInfo();
-		wxProductInfo.setStoreid("000000");
-		wxProductInfo.setPhonenum("12322123112");
-		wxProductInfo.setProductname("墨镜");
-		wxProductInfo.setStars("4.5");
-		wxProductInfo.setBrand("Chanel");
-		wxProductInfo.setFullprice("1000");
-		wxProductInfo.setSaleprice("600");
-		wxProductInfo.setDeposit("35");
-		wxProductInfo.setIndexpage("产品封面");
-		wxProductInfo.setProductinfo("产品信息");
-		wxProductInfo.setRemark1("re1");
-		wxProductInfo.setRemark2("re2");
-		Integer result = serviceImpl.insert(wxProductInfo);
-		log.info(result+"");
+	
+		String s ="186280207321";
+		//String s1 = s.substring(0,11);
+		if(s.length()>11) {
+			s = s.substring(0, 11);
+		}
+		log.info(s);
 	}
 
 }

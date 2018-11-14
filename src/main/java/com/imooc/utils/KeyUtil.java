@@ -18,4 +18,10 @@ public class KeyUtil {
 			return  System.currentTimeMillis()+String.valueOf(number); 
 
 		}
+		public static synchronized String getTimestamp(){
+			Random random = new Random();
+			return "11"+(int)((Math.random()*9+1)*100000); 
+
+		}
+		
 }

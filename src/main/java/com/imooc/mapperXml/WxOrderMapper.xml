@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.mapper.WxOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.dataobject.WxOrder" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="storephone" property="storephone" jdbcType="VARCHAR" />
+    <result column="custname" property="custname" jdbcType="VARCHAR" />
+    <result column="custphone" property="custphone" jdbcType="VARCHAR" />
+    <result column="custaddr" property="custaddr" jdbcType="VARCHAR" />
+    <result column="productid" property="productid" jdbcType="INTEGER" />
+    <result column="orderfee" property="orderfee" jdbcType="DOUBLE" />
+    <result column="buyfee" property="buyfee" jdbcType="DOUBLE" />
+    <result column="mailfee" property="mailfee" jdbcType="DOUBLE" />
+    <result column="totalfee" property="totalfee" jdbcType="DOUBLE" />
+    <result column="gettype" property="gettype" jdbcType="INTEGER" />
+    <result column="payflag" property="payflag" jdbcType="INTEGER" />
+    <result column="remake" property="remake" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, storephone, custname, custphone, custaddr, productid, orderfee, buyfee, mailfee, 
+    totalfee, gettype, payflag, remake
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wx_order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wx_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.dataobject.WxOrder" >
+    insert into wx_order (id, storephone, custname, 
+      custphone, custaddr, productid, 
+      orderfee, buyfee, mailfee, 
+      totalfee, gettype, payflag, 
+      remake)
+    values (#{id,jdbcType=VARCHAR}, #{storephone,jdbcType=VARCHAR}, #{custname,jdbcType=VARCHAR}, 
+      #{custphone,jdbcType=VARCHAR}, #{custaddr,jdbcType=VARCHAR}, #{productid,jdbcType=INTEGER}, 
+      #{orderfee,jdbcType=DOUBLE}, #{buyfee,jdbcType=DOUBLE}, #{mailfee,jdbcType=DOUBLE}, 
+      #{totalfee,jdbcType=DOUBLE}, #{gettype,jdbcType=INTEGER}, #{payflag,jdbcType=INTEGER}, 
+      #{remake,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.dataobject.WxOrder" >
+    insert into wx_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storephone != null" >
+        storephone,
+      </if>
+      <if test="custname != null" >
+        custname,
+      </if>
+      <if test="custphone != null" >
+        custphone,
+      </if>
+      <if test="custaddr != null" >
+        custaddr,
+      </if>
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="orderfee != null" >
+        orderfee,
+      </if>
+      <if test="buyfee != null" >
+        buyfee,
+      </if>
+      <if test="mailfee != null" >
+        mailfee,
+      </if>
+      <if test="totalfee != null" >
+        totalfee,
+      </if>
+      <if test="gettype != null" >
+        gettype,
+      </if>
+      <if test="payflag != null" >
+        payflag,
+      </if>
+      <if test="remake != null" >
+        remake,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="storephone != null" >
+        #{storephone,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="custphone != null" >
+        #{custphone,jdbcType=VARCHAR},
+      </if>
+      <if test="custaddr != null" >
+        #{custaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="orderfee != null" >
+        #{orderfee,jdbcType=DOUBLE},
+      </if>
+      <if test="buyfee != null" >
+        #{buyfee,jdbcType=DOUBLE},
+      </if>
+      <if test="mailfee != null" >
+        #{mailfee,jdbcType=DOUBLE},
+      </if>
+      <if test="totalfee != null" >
+        #{totalfee,jdbcType=DOUBLE},
+      </if>
+      <if test="gettype != null" >
+        #{gettype,jdbcType=INTEGER},
+      </if>
+      <if test="payflag != null" >
+        #{payflag,jdbcType=INTEGER},
+      </if>
+      <if test="remake != null" >
+        #{remake,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.dataobject.WxOrder" >
+    update wx_order
+    <set >
+      <if test="storephone != null" >
+        storephone = #{storephone,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        custname = #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="custphone != null" >
+        custphone = #{custphone,jdbcType=VARCHAR},
+      </if>
+      <if test="custaddr != null" >
+        custaddr = #{custaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        productid = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="orderfee != null" >
+        orderfee = #{orderfee,jdbcType=DOUBLE},
+      </if>
+      <if test="buyfee != null" >
+        buyfee = #{buyfee,jdbcType=DOUBLE},
+      </if>
+      <if test="mailfee != null" >
+        mailfee = #{mailfee,jdbcType=DOUBLE},
+      </if>
+      <if test="totalfee != null" >
+        totalfee = #{totalfee,jdbcType=DOUBLE},
+      </if>
+      <if test="gettype != null" >
+        gettype = #{gettype,jdbcType=INTEGER},
+      </if>
+      <if test="payflag != null" >
+        payflag = #{payflag,jdbcType=INTEGER},
+      </if>
+      <if test="remake != null" >
+        remake = #{remake,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.dataobject.WxOrder" >
+    update wx_order
+    set storephone = #{storephone,jdbcType=VARCHAR},
+      custname = #{custname,jdbcType=VARCHAR},
+      custphone = #{custphone,jdbcType=VARCHAR},
+      custaddr = #{custaddr,jdbcType=VARCHAR},
+      productid = #{productid,jdbcType=INTEGER},
+      orderfee = #{orderfee,jdbcType=DOUBLE},
+      buyfee = #{buyfee,jdbcType=DOUBLE},
+      mailfee = #{mailfee,jdbcType=DOUBLE},
+      totalfee = #{totalfee,jdbcType=DOUBLE},
+      gettype = #{gettype,jdbcType=INTEGER},
+      payflag = #{payflag,jdbcType=INTEGER},
+      remake = #{remake,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -22,5 +22,9 @@ wechat:
     mpChampionSecret: e6455024387619781985cc61252a076c
     #keyPath: /usr/java/cert/apiclient_cert.p12
     keyPath: /Users/usr/local/wechatcert/apiclient_cert.p12
+glass: 
+    mailFee: 20.0
+projectUrls: 
+    
 server: 
   context-path: /sell

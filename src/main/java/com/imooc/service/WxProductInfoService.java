@@ -2,10 +2,8 @@ package com.imooc.service;
 
 
 
+import java.math.BigInteger;
 import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import com.imooc.dataobject.WxProductInfo;
 
@@ -15,9 +13,11 @@ public interface WxProductInfoService {
 	
 	List<WxProductInfo> findList();
 	
-	WxProductInfo selectById(Integer id);
+	WxProductInfo selectById(BigInteger bigInteger);
 	
-	Integer updateById(WxProductInfo wxProductInfo);
+	Integer updateByObject(WxProductInfo wxProductInfo);
 	
-	Integer deleteById(Integer id);
+	Integer deleteById(BigInteger bigInteger);
+	
+	WxProductInfo save(WxProductInfo wxProductInfo);
 }

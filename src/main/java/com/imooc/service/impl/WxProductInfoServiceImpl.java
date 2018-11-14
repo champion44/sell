@@ -1,16 +1,16 @@
 package com.imooc.service.impl;
 
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.imooc.dataobject.WxProductInfo;
 import com.imooc.mapper.WxProductInfoMapper;
+import com.imooc.repository.WxProductInfoRepository;
 import com.imooc.service.WxProductInfoService;
 
 @Service
@@ -20,9 +20,9 @@ public class WxProductInfoServiceImpl implements WxProductInfoService{
 	@Autowired
 	private WxProductInfoMapper  wxProductInfoMapper;
 
-//	@Autowired
-//	private WxProductInfoRepository wxProductInfoRepository;
-//	
+	@Autowired
+	private WxProductInfoRepository wxProductInfoRepository;
+	
 	@Override
 	public Integer insert(WxProductInfo wxProductInfo) {
 		
@@ -37,18 +37,23 @@ public class WxProductInfoServiceImpl implements WxProductInfoService{
 	}
 
 	@Override
-	public WxProductInfo selectById(Integer id) {
-		return wxProductInfoMapper.selectByPrimaryKey(id);
+	public WxProductInfo selectById(BigInteger  integer) {
+		return wxProductInfoMapper.selectByPrimaryKey(integer);
 	}
 
 	@Override
-	public Integer updateById(WxProductInfo wxProductInfo) {
+	public Integer updateByObject(WxProductInfo wxProductInfo) {
 		return wxProductInfoMapper.updateByPrimaryKey(wxProductInfo);
 	}
 
 	@Override
-	public Integer deleteById(Integer id) {
-		return wxProductInfoMapper.deleteByPrimaryKey(id);
+	public Integer deleteById(BigInteger i) {
+		return wxProductInfoMapper.deleteByPrimaryKey(i);
+	}
+
+	@Override
+	public WxProductInfo save(WxProductInfo wxProductInfo) {
+		return wxProductInfoRepository.save(wxProductInfo);
 	}
 
 }

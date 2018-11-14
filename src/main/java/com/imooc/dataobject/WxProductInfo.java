@@ -1,15 +1,19 @@
 package com.imooc.dataobject;
 
+import java.math.BigInteger;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.Data;
 
 @Data
+@Entity
 public class WxProductInfo {
 	@Id
     @GeneratedValue
-    private Integer id;
+    private BigInteger id;
 
     private String storeid;
 
@@ -27,21 +31,25 @@ public class WxProductInfo {
 
     private String deposit;
 
-    private String indexpage;
-
     private String productinfo;
+
+    private String indexpic;
+
+    private String pic1;
+
+    private String pic2;
+
+    private String pic3;
+
+    private String pic4;
+
+    private String pic5;
 
     private String remark1;
 
     private String remark2;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  
 
     public String getStoreid() {
         return storeid;
@@ -105,14 +113,6 @@ public class WxProductInfo {
 
     public void setDeposit(String deposit) {
         this.deposit = deposit == null ? null : deposit.trim();
-    }
-
-    public String getIndexpage() {
-        return indexpage;
-    }
-
-    public void setIndexpage(String indexpage) {
-        this.indexpage = indexpage == null ? null : indexpage.trim();
     }
 
     public String getProductinfo() {

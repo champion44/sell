@@ -1,11 +1,8 @@
 package com.imooc.utils;
 
-import java.util.List;
 
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.imooc.dataobject.Student;
 
 public class JsonUtil {
 
@@ -15,7 +12,7 @@ public class JsonUtil {
 		Gson gson = gsonBuilder.create();
 		return gson.toJson(object);
 	}
-
+/*
 	public static List<Student> fromJson(String ori) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();
@@ -24,4 +21,5 @@ public class JsonUtil {
 		}.getType());
 		return studentList;
 	}
+	*/
 }

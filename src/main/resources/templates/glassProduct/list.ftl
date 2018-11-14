@@ -39,7 +39,7 @@
                             <td>${wxProductInfo.productname}</td>
                              <td>${wxProductInfo.stars}</td>
                             <td>${wxProductInfo.brand}</td>
-                             <td>${wxProductInfo.indexpage}</td>
+                             <td>${wxProductInfo.pictureids!''}</td>
                             <td>${wxProductInfo.fullprice}</td>
                              <td>${wxProductInfo.saleprice}</td>
                             <td>${wxProductInfo.deposit}</td>

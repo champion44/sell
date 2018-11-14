@@ -27,16 +27,17 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 @Slf4j
 public class SellerAuthorizeAspect {
-
+/*
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    @Pointcut("execution(public * com.imooc.controller.Seller*.*(..))" +
+    @Pointcut("execution(public * com.imooc.controller.Glass*.*(..))" +
     "&& !execution(public * com.imooc.controller.SellerUserController.*(..))")
     public void verify() {}
 
     @Before("verify()")
     public void doVerify() {
+ 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
 
@@ -53,5 +54,8 @@ public class SellerAuthorizeAspect {
             log.warn("【登录校验】Redis中查不到token");
             throw new SellerAuthorizeException();
         }
-    }
+   
+    
+}
+*/
 }

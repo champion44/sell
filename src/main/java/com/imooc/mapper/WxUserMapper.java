@@ -1,7 +1,9 @@
 package com.imooc.mapper;
 
 import com.imooc.dataobject.WxUser;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface WxUserMapper {
     int deleteByPrimaryKey(Integer id);
 
